@@ -24,6 +24,17 @@ if _env_loaded is None:
     load_dotenv()
     _env_loaded = "(current working directory)"
 
+
+def _parse_cors_origins() -> list[str]:
+    """Comma-separated browser origins allowed to call the API (local Vite + deployed backend)."""
+    raw = (os.environ.get("CORS_ORIGINS") or "").strip()
+    if raw:
+        return [o.strip() for o in raw.split(",") if o.strip()]
+    return ["http://localhost:5173", "http://127.0.0.1:5173"]
+
+
+CORS_ORIGINS = _parse_cors_origins()
+
 # Base paths
 UPLOAD_DIR = BASE_DIR / "uploads"
 PDF_DIR = UPLOAD_DIR / "pdfs"

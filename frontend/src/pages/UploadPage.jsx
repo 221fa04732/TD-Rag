@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const API = ''
+const API = 'http://192.168.10.202:8000'
 
 export default function UploadPage() {
   const [books, setBooks] = useState([])

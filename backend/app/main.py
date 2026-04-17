@@ -1,11 +1,20 @@
 """FastAPI app: CORS, static uploads, routes."""
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
-from app.config import UPLOAD_DIR, GEMINI_API_KEY, GEMINI_IMAGE_EXPLAIN_API_KEY
+from app.config import UPLOAD_DIR, GEMINI_API_KEY, GEMINI_IMAGE_EXPLAIN_API_KEY, CORS_ORIGINS
 from app.routes import books, images, image_explanation, query
 
 app = FastAPI(title="Textbook Image RAG", description="Upload PDF + images with citations, query for text and images.")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=CORS_ORIGINS,
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.on_event("startup")

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import AnswerText from '../components/AnswerText'
 import ExplanationText from '../components/ExplanationText'
 
-const API = ''
+const API = 'http://192.168.10.202:8000'
 
 export default function QueryPage() {
   const [books, setBooks] = useState([])
